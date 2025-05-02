@@ -46,16 +46,18 @@ docker image sendmail test:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
   script:
-    - docker run --rm \
-      -e SMTP_SERVER=$SMTP_SERVER \
-      -e SMTP_PORT=587 \
-      -e SMTP_USER=$SMTP_USER \
-      -e SMTP_PASS=$(echo "$SMTP_PASS_BASE64" | base64 -d) \
-      -e FROM=$SMTP_USER \
-      -e TO=$SMTP_TO \
-      -e SUBJECT="Testmail from registry.hl-dev.de/alpine-mailutil" \
-      -e BODY="This message uses SMTP authentication." \
-      registry.hl-dev.de/alpine-mailutil:$TEST_TAG \
+  - >
+    docker run --rm
+    -e SMTP_SERVER=$SMTP_SERVER
+    -e SMTP_PORT=587
+    -e SMTP_USER=$SMTP_USER
+    -e SMTP_PASS="$(echo $SMTP_PASS_BASE64 | base64 -d)"
+    -e FROM=$SMTP_USER
+    -e TO=$SMTP_TO
+    -e SUBJECT="Testmail from alpine-mailutil"
+    -e BODY="This message uses SMTP authentication."
+    $TEST_TAG
+
 
 docker image push registry:
   <<: *docker_template
