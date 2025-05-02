@@ -132,12 +132,12 @@ update readme with versions:
       inserted = 1
       }
       }' README.MD > README.new && mv README.new README.MD
-    - git status
+    - cat README.MD
     # Commit and push changes
     - git add README.MD
     - >
-      git commit -m "chore: update image versions in README for $CI_COMMIT_TAG" &&
-      git push https://$GITLAB_USER:$GITLAB_TOKEN@gitlab.hl-dev.de/$CI_PROJECT_PATH.git HEAD:$CI_COMMIT_BRANCH
+      git commit -m "chore: update image versions in README for $CI_COMMIT_TAG"
+    - git push https://$GITLAB_USER:$GITLAB_TOKEN@gitlab.hl-dev.de/$CI_PROJECT_PATH.git main
 
 release job:
   stage: release
