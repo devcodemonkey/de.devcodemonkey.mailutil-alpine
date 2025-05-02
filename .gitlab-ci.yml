@@ -14,6 +14,7 @@ stages:
   - docker image push registry
   - update readme with versions
   - docker image test push registry
+  - generate release notes
   - release
 
 .docker_template: &docker_template
@@ -81,7 +82,7 @@ docker image test push registry:
     - docker run --rm --entrypoint sh $LATEST_TAG -c 'echo "Pushed image works."'
 
 generate release notes:
-  stage: release
+  stage: generate release notes
   image: $DOCKER_IMAGE
   services:
     - $DOCKER_IMAGE
