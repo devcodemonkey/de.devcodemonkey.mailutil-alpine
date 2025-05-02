@@ -116,13 +116,13 @@ update readme with versions:
     # Create formatted version block
     - git fetch origin main
     - git checkout main
-    - ls
+
     - echo "### 🧱 Version ${CI_COMMIT_TAG}" > new_version_block.md
     - awk '{ print "- " $0 }' version.txt >> new_version_block.md
     - echo "" >> new_version_block.md
 
     # Insert after VERSION_START block
-    - >
+    - |
       awk '
       BEGIN { inserted=0 }
       {
