@@ -138,6 +138,7 @@ update readme with versions:
     - git add README.MD
     - >
       git commit -m "chore: update image versions in README for $CI_COMMIT_TAG"
+    - git pull --rebase origin main
     - git push origin main
 
 release job:
