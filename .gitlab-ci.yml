@@ -108,14 +108,22 @@ update readme with versions:
       artifacts: true
   rules:
     - if: $CI_COMMIT_TAG
+  before_script:
+    - apk add --no-cache git
+    - git config --global user.name "GitLab CI"
+    - git config --global user.email "gitlab@hl-dev.de"
   script:
     # Create formatted version block
+    - git fetch origin main
+    - git checkout main
+    - ls
     - echo "### 🧱 Version ${CI_COMMIT_TAG}" > new_version_block.md
     - awk '{ print "- " $0 }' version.txt >> new_version_block.md
     - echo "" >> new_version_block.md
 
     # Insert after VERSION_START block
-    - awk '
+    - >
+      awk '
       BEGIN { inserted=0 }
       {
       print
@@ -124,12 +132,8 @@ update readme with versions:
       inserted = 1
       }
       }' README.MD > README.new && mv README.new README.MD
-
+    - git status
     # Commit and push changes
-    - apk add --no-cache git
-    - git config --global user.name "GitLab CI"
-    - git config --global user.email "gitlab@hl-dev.de"
-    - git checkout $CI_COMMIT_BRANCH || git checkout -b release-readme-update
     - git add README.MD
     - >
       git commit -m "chore: update image versions in README for $CI_COMMIT_TAG" &&
