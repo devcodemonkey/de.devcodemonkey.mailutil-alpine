@@ -12,8 +12,8 @@ stages:
   - docker image build
   - docker image test
   - docker image push registry
-  - docker image test push registry
   - update readme with versions
+  - docker image test push registry
   - release
 
 .docker_template: &docker_template
@@ -80,6 +80,28 @@ docker image test push registry:
     - docker pull $LATEST_TAG
     - docker run --rm --entrypoint sh $LATEST_TAG -c 'echo "Pushed image works."'
 
+generate release notes:
+  stage: release
+  image: $DOCKER_IMAGE
+  services:
+    - $DOCKER_IMAGE
+  rules:
+    - if: $CI_COMMIT_TAG
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker pull $VERSION_TAG
+    - docker create --name extract-container $VERSION_TAG
+    - docker cp extract-container:/version.txt ./version.txt
+    - docker rm extract-container
+    - echo "### Image Versions" > release.md
+    - echo "\`\`\`" >> release.md
+    - cat version.txt >> release.md
+    - echo "\`\`\`" >> release.md
+  artifacts:
+    paths:
+      - release.md
+
 update readme with versions:
   stage: release
   image: gitlab-org/ci-cd/git:latest
@@ -111,28 +133,6 @@ update readme with versions:
     - >
       git commit -m "chore: update image versions in README for $CI_COMMIT_TAG" &&
       git push https://$GITLAB_USER:$GITLAB_TOKEN@gitlab.hl-dev.de/$CI_PROJECT_PATH.git HEAD:$CI_COMMIT_BRANCH
-
-generate release notes:
-  stage: release
-  image: $DOCKER_IMAGE
-  services:
-    - $DOCKER_IMAGE
-  rules:
-    - if: $CI_COMMIT_TAG
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker pull $VERSION_TAG
-    - docker create --name extract-container $VERSION_TAG
-    - docker cp extract-container:/version.txt ./version.txt
-    - docker rm extract-container
-    - echo "### Image Versions" > release.md
-    - echo "\`\`\`" >> release.md
-    - cat version.txt >> release.md
-    - echo "\`\`\`" >> release.md
-  artifacts:
-    paths:
-      - release.md
 
 release job:
   stage: release
