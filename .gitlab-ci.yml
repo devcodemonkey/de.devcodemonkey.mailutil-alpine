@@ -123,8 +123,8 @@ update readme with versions:
 
     # Commit and push changes
     - apk add --no-cache git
-    - git config --global user.name "$GITLAB_USER"
-    - git config --global user.email "$GITLAB_USER@gitlab"
+    - git config --global user.name "${GITLAB_USER:-GitLab CI}"
+    - git config --global user.email "${GITLAB_USER:-gitlabci}@gitlab"
     - git checkout $CI_COMMIT_BRANCH || git checkout -b release-readme-update
     - git add README.MD
     - >
