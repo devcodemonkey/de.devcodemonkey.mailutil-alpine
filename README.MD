@@ -103,4 +103,3 @@ docker run --rm \
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
-<!-- VERSION_END -->

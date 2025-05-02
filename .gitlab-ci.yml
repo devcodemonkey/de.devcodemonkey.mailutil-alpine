@@ -109,17 +109,21 @@ update readme with versions:
   rules:
     - if: $CI_COMMIT_TAG
   script:
-    # Format version content for README
-    - echo "<!-- VERSION_START -->" > versions.md
-    - awk '{ print "* " $0 }' version.txt >> versions.md
-    - echo "<!-- VERSION_END -->" >> versions.md
+    # Create formatted version block
+    - echo "### 🧱 Version ${CI_COMMIT_TAG}" > new_version_block.md
+    - awk '{ print "- " $0 }' version.txt >> new_version_block.md
+    - echo "" >> new_version_block.md
 
-    # Replace section in README.MD (correct casing)
+    # Insert after VERSION_START block
     - awk '
-      BEGIN { p=1 }
-      /<!-- VERSION_START -->/ { print; while (getline < "versions.md") print; p=0 }
-      /<!-- VERSION_END -->/ { p=1; next }
-      p' README.MD > README.new && mv README.new README.MD
+      BEGIN { inserted=0 }
+      {
+      print
+      if ($0 ~ /<!-- VERSION_START -->/ && !inserted) {
+      while ((getline line < "new_version_block.md") > 0) print line
+      inserted = 1
+      }
+      }' README.MD > README.new && mv README.new README.MD
 
     # Commit and push changes
     - apk add --no-cache git
