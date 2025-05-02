@@ -99,3 +99,8 @@ docker run --rm \
 | `SMTP_PASS`     | SMTP password                                       |
 | `TLS_CERT_PATH` | Path to a mounted TLS cert (e.g. `/certs/smtp.pem`) |
 | `TLS_CERTCHECK` | Set to `off` to disable cert verification           |
+
+## 📦 Image Versions
+
+<!--VERSION_START-->
+<!--VERSION_END-->
