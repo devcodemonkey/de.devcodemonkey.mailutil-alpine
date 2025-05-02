@@ -107,3 +107,7 @@ docker run --rm \
 - alpine: 3.21.3
 - msmtp: msmtp version 1.8.27
 
+### 🧱 Version v1.0.0
+- alpine: 3.21.3
+- msmtp: msmtp version 1.8.27
+
