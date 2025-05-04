@@ -2,6 +2,11 @@
 
 set -e
 
+# Load body from file if specified
+if [ -n "$BODY_FILE" ] && [ -f "$BODY_FILE" ]; then
+  BODY="$(cat "$BODY_FILE")"
+fi
+
 # Required environment variables
 : "${SMTP_SERVER:?Missing SMTP_SERVER}"
 : "${SMTP_PORT:?Missing SMTP_PORT}"
