@@ -60,6 +60,9 @@ chmod 600 /etc/msmtprc
   echo "Subject: $SUBJECT"
   echo "To: $TO"
   echo "From: $FROM"
+  echo "Content-Type: text/plain; charset=UTF-8"
+  echo "Content-Transfer-Encoding: 8bit"
   echo
   echo "$BODY"
 } | msmtp -t
+
