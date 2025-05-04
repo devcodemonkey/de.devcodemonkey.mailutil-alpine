@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --no-cache msmtp ca-certificates
+RUN apk add --no-cache msmtp ca-certificates musl-locales
 ENV LANG=C.UTF-8
 
 COPY send-mail.sh /usr/local/bin/send-mail.sh
