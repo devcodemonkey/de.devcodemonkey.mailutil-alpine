@@ -60,7 +60,7 @@ docker image sendmail test:
       -e FROM=$SMTP_USER
       -e TO=$SMTP_TO
       -e SUBJECT="Testmail from alpine-mailutil"
-      -e BODY="This message uses SMTP authentication."
+      -e BODY="This is a test message with symbols 😊👍❌☑️✅"
       $TEST_TAG
 
 docker image sendmail from file test:
