@@ -140,7 +140,7 @@ update readme with versions:
   script:
     # Create formatted version block
     - git checkout main
-    - git pull --no-rebase origin main
+    - git reset --hard origin/main
 
     - echo "### 🧱 Version ${CI_COMMIT_TAG}" > new_version_block.md
     - awk '{ print "- " $0 }' version.txt >> new_version_block.md
