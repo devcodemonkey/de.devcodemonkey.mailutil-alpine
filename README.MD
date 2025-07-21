@@ -3,6 +3,10 @@
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
+### 🧱 Version v1.2.2
+- alpine: 3.22.1
+- msmtp: msmtp version 1.8.28
+
 ### 🧱 Version v1.2.1
 
 - alpine: 3.22.0
