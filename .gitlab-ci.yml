@@ -84,18 +84,6 @@ docker image sendmail from file test:
       -e BODY_FILE="/tmp/body.txt"
       $TEST_TAG
 
-docker image push registry:
-  <<: *docker_template
-  stage: docker image push registry
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - docker pull $TEST_TAG
-    - docker tag $TEST_TAG $LATEST_TAG
-    - docker push $LATEST_TAG
-    - docker tag $TEST_TAG $VERSION_TAG
-    - docker push $VERSION_TAG
-
 docker image test push registry:
   <<: *docker_template
   stage: docker image test push registry
@@ -136,7 +124,10 @@ update readme with versions:
     - apk add --no-cache git
     - git config --global user.name "GitLab CI"
     - git config --global user.email "gitlab@hl-dev.de"
-    - git remote set-url origin https://$GITLAB_USER:$GITLAB_TOKEN@gitlab.hl-dev.de/$CI_PROJECT_PATH.git
+    - git remote set-url origin ssh://git@${CI_SERVER_SHELL_SSH_HOST}:${CI_SERVER_SHELL_SSH_PORT}/${CI_PROJECT_PATH}.git
+    - mkdir -p ~/.ssh
+    - cp ${DEPLOY_KEY} ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
   script:
     # Create formatted version block
     - git checkout main
@@ -162,7 +153,19 @@ update readme with versions:
     - git add README.MD
     - >
       git commit -m "chore: update image versions in README for $CI_COMMIT_TAG"
-    - git push origin main
+    - git push origin main -o ci.skip
+
+docker image push registry:
+  <<: *docker_template
+  stage: docker image push registry
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - docker pull $TEST_TAG
+    - docker tag $TEST_TAG $LATEST_TAG
+    - docker push $LATEST_TAG
+    - docker tag $TEST_TAG $VERSION_TAG
+    - docker push $VERSION_TAG
 
 release job:
   stage: release
