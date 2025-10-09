@@ -13,3 +13,9 @@ git push -o ci.variable="FORCE_TEST=true"
 ```bash
 git push -o ci.skip
 ```
+
+### Git push rolling image build
+
+```bash
+git push -o ci.variable="ROLLING_BUILD=true"
+```
