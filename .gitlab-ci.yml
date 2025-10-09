@@ -32,7 +32,7 @@ docker image build:
   <<: *docker_template
   stage: docker image build
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
     - if: '$ROLLING_BUILD == "true"'
   script:
@@ -43,7 +43,7 @@ docker image smoke test:
   <<: *docker_template
   stage: docker image test
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
     - if: '$ROLLING_BUILD == "true"'
   script: docker run --rm --entrypoint sh $TEST_TAG -c 'apk info | grep msmtp && echo "msmtp available"'
@@ -113,7 +113,7 @@ docker image sendmail test:
   <<: *docker_template
   stage: docker image test
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
   script:
     - >
@@ -132,7 +132,7 @@ docker image sendmail from file test:
   <<: *docker_template
   stage: docker image test
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
   script:
     - echo "This is a test message with symbols 😊👍❌☑️✅" > body.txt
@@ -162,7 +162,7 @@ generate release notes:
   stage: generate release notes
   <<: *docker_template
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
   script:
     - docker pull $TEST_TAG
