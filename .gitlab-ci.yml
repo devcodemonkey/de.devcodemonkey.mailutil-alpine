@@ -72,12 +72,28 @@ check new versions:
     - echo "current version in new image:"
   script:
     # if version is new send a mail
-    - dos2unix .version/version_latest.txt 2>/dev/null || true
-    - dos2unix current_version.txt 2>/dev/null || true
-    - sed 's/[[:space:]]*$//' current_version.txt > current_version_clean.txt
-    - sed 's/[[:space:]]*$//' .version/version_latest.txt > version_latest_clean.txt
     - |
-      if ! cmp -s current_version_clean.txt version_latest_clean.txt; then
+      NEW_VERSION_DETECTED=false
+
+      # Parse current version
+      while IFS=': ' read -r key value; do
+        current_key=$(echo "$key" | tr -d '[:space:]')
+        current_value=$(echo "$value" | tr -d '[:space:]')
+        
+        # Find corresponding key in version_latest.txt
+        latest_value=$(grep "^$current_key:" .version/version_latest.txt | cut -d':' -f2- | tr -d '[:space:]')
+        
+        if [ "$current_value" != "$latest_value" ]; then
+          echo "Version difference detected for $current_key:"
+          echo "  Current: $current_value"
+          echo "  Latest:  $latest_value"
+          NEW_VERSION_DETECTED=true
+        else
+          echo "No change for $current_key: $current_value"
+        fi
+      done < current_version.txt
+
+      if [ "$NEW_VERSION_DETECTED" = "true" ]; then
         echo "New version detected, sending mail..."
         docker run --rm \
         -e SMTP_SERVER=$SMTP_SERVER \
