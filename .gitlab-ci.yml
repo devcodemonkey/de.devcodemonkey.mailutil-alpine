@@ -12,8 +12,8 @@ stages:
   - docker image build
   - docker image test
   - docker image push registry
-  - update readme
   - generate release notes
+  - update readme
   - docker image test push registry
   - release
 
