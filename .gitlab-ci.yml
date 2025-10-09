@@ -64,16 +64,16 @@ check new versions:
   rules:
     - if: $ROLLING_BUILD == "true"
   before_script:
-    - echo "latest version in .version/version_latest.txt:"
-    - cat .version/version_latest.txt
-    - echo "current version in new image:"
     - docker pull $TEST_TAG
     - docker run --rm --entrypoint cat $TEST_TAG /version.txt > current_version.txt
     - cat current_version.txt
+    - echo "latest version in .version/version_latest.txt:"
+    - cat .version/version_latest.txt
+    - echo "current version in new image:"
   script:
     # if version is new send a mail
     - |
-      if ! grep -Fxq "$(cat current_version.txt)" .version/version_latest.txt; then
+      if ! cmp -s current_version.txt .version/version_latest.txt; then
         echo "New version detected, sending mail..."
         docker run --rm
         -e SMTP_SERVER=$SMTP_SERVER
