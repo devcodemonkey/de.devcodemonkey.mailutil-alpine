@@ -34,6 +34,7 @@
 ## 🏷️ Image Tags Description
 
 - `latest`: Points to the latest stable release (see above versions).
+- `<version>`: Specific version tags (e.g., `v1.2.3`, `v1.2.2`, etc.).
 - `rolling`: Points to the latest build (may be unstable), created daily without tests.
 - `testing`: Developer image for testing the build process, not for production use.
 
