@@ -12,9 +12,9 @@ stages:
   - docker image build
   - docker image test
   - docker image push registry
-  - update readme with versions
-  - docker image test push registry
+  - update readme
   - generate release notes
+  - docker image test push registry
   - release
 
 .docker_template: &docker_template
@@ -114,7 +114,7 @@ generate release notes:
       - release.md
 
 update readme with versions:
-  stage: update readme with versions
+  stage: update readme
   <<: *docker_template
   needs:
     - job: generate release notes
