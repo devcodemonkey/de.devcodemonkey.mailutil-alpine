@@ -193,7 +193,7 @@ docker run --rm \
   -e TO="$MAIL_TO" \
   -e SUBJECT="$MAIL_SUBJECT" \
   -e BODY_FILE="/tmp/body.txt" \
-  registry.hl-dev.de/root/de.devcocdemonkey.aichecker.mailutil-alpine:latest
+  registry.hl-dev.de/root/mailutil-alpine:latest
 ```
 
 ---
