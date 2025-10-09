@@ -176,6 +176,12 @@ update readme with versions:
     - git add README.MD
     - >
       git commit -m "chore: update image versions in README for $CI_COMMIT_TAG"
+
+    # save last version.txt to repository file
+    - cp version.txt .version/version_latest.txt -f
+    - git add .version/version_latest.txt
+    - >
+      git commit -m "chore: update version_latest.txt for $CI_COMMIT_TAG"
     - git push origin main -o ci.skip
 
 docker image push registry:
