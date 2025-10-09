@@ -72,8 +72,10 @@ check new versions:
     - echo "current version in new image:"
   script:
     # if version is new send a mail
+    - sed 's/[[:space:]]*$//' current_version.txt > current_version_clean.txt
+    - sed 's/[[:space:]]*$//' .version/version_latest.txt > version_latest_clean.txt
     - |
-      if ! cmp -s current_version.txt .version/version_latest.txt; then
+      if ! cmp -s current_version_clean.txt version_latest_clean.txt; then
         echo "New version detected, sending mail..."
         docker run --rm \
         -e SMTP_SERVER=$SMTP_SERVER \
