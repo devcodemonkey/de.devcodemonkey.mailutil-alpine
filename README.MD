@@ -31,6 +31,14 @@
 
 ---
 
+## 🏷️ Image Tags Description
+
+- `latest`: Points to the latest stable release (see above versions).
+- `rolling`: Points to the latest build (may be unstable), created daily without tests.
+- `testing`: Developer image for testing the build process, not for production use.
+
+---
+
 ## 🛠️ Use of the Container
 
 This container allows you to send simple emails from a Docker container using Alpine Linux and `msmtp`. It supports:
