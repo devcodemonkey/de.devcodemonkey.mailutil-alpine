@@ -72,6 +72,8 @@ check new versions:
     - echo "current version in new image:"
   script:
     # if version is new send a mail
+    - dos2unix .version/version_latest.txt 2>/dev/null || true
+    - dos2unix current_version.txt 2>/dev/null || true
     - sed 's/[[:space:]]*$//' current_version.txt > current_version_clean.txt
     - sed 's/[[:space:]]*$//' .version/version_latest.txt > version_latest_clean.txt
     - |
