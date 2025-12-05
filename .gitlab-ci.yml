@@ -275,26 +275,30 @@ dockerhub image test pull registry:
 
 update dockerhub readme:
   stage: dockerhub update readme
+  image: node:latest
   rules:
     - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG) && $ROLLING_BUILD != "true"
     - if: '$FORCE_TEST == "true"'
     - if: '$ROLLING_BUILD == "true"'
   before_script:
+    - apk add --no-cache dos2unix
+    - dos2unix --version
     - apk add --no-cache curl
     - curl --version
-    - apk add --no-cache jq
-    - jq --version
   script:
     - |
       TOKEN=$(curl -s -H "Content-Type: application/json" \
         -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_TOKEN\"}" \
         https://hub.docker.com/v2/users/login/ | jq -r .token)
-
+    - dos2unix README.MD
+    - |
+      jq -Rs '{full_description: .}' README.MD > payload.json
+    - |
       curl -X PATCH \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
         https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/mailutil-alpine/ \
-        -d "{\"full_description\": \"$(cat README.MD | sed ':a;N;$!ba;s/\n/\\n/g')\"}"
+        -d @payload.json
 
 release job:
   stage: release
