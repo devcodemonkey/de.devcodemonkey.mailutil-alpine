@@ -299,7 +299,7 @@ update dockerhub readme:
   script:
     - |
       TOKEN=$(curl -s -H "Content-Type: application/json" \
-        -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_TOKEN\"}" \
+        -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" \
         https://hub.docker.com/v2/users/login/ | jq -r .token)
     - |
       jq -Rs '{full_description: .}' README.MD > payload.json
