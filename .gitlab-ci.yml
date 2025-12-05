@@ -263,6 +263,18 @@ docker image test pull registry:
     - docker pull $LATEST_TAG
     - docker run --rm --entrypoint sh $LATEST_TAG -c 'echo "Pushed image works."'
 
+dockerhub image test pull registry:
+  <<: *docker_template
+  stage: docker image test pull registry
+  image: docker:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  before_script:
+    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+  script:
+    - docker pull $DOCKERHUB_USERNAME/mailutil-alpine:latest
+    - docker run --rm --entrypoint sh $DOCKERHUB_USERNAME/mailutil-alpine:latest -c 'echo "Pushed DockerHub image works."'
+
 update dockerhub readme:
   stage: dockerhub update readme
   image: curlimages/curl:latest
