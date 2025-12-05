@@ -1,12 +1,14 @@
 # 📬 alpine-mailutil
 
+## 🚦 Pipeline Status
+
+[![pipeline status](https://gitlab.hl-dev.de/root/mailutil-alpine/badges/main/pipeline.svg)](https://gitlab.hl-dev.de/root/mailutil-alpine/-/commits/main)
+
+[![Latest Release](https://gitlab.hl-dev.de/root/mailutil-alpine/-/badges/release.svg)](https://gitlab.hl-dev.de/root/mailutil-alpine/-/releases)
+
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
-### 🧱 Version v1.2.4
-- alpine: 3.23.0
-- msmtp: msmtp version 1.8.32
-
 
 ### 🧱 Version v1.2.3
 
