@@ -1,2 +1,2 @@
-alpine: 3.22.2
-msmtp: 1.8.28
+alpine: 3.23.0
+msmtp: msmtp version 1.8.32
