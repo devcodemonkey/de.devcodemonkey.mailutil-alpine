@@ -1,7 +1,7 @@
 image: docker:latest
 
 variables:
-  DOCKER_IMAGE: docker:28.1.1-dind
+  DOCKER_IMAGE: docker:29.1.2-dind
   IMAGE_NAME: $CI_REGISTRY_IMAGE
   TEST_TAG: "$IMAGE_NAME:testing"
   LATEST_TAG: "$IMAGE_NAME:latest"
@@ -16,7 +16,7 @@ stages:
   - docker image push registry
   - docker image test pull registry
   - generate release notes
-  - update readme  
+  - update readme
   - dockerhub update readme
   - release
 
@@ -69,7 +69,7 @@ dockerhub pull rolling image:
   script:
     - docker pull $TEST_TAG
     - docker tag $TEST_TAG $DOCKERHUB_USERNAME/mailutil-alpine:rolling
-    - docker push $DOCKERHUB_USERNAME/mailutil-alpine:rolling    
+    - docker push $DOCKERHUB_USERNAME/mailutil-alpine:rolling
 
 check new versions:
   <<: *docker_template
