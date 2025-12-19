@@ -88,7 +88,7 @@ docker run --rm \
   -e TO=devteam@example.com \
   -e SUBJECT="Notification from CI" \
   -e BODY="Your job completed successfully." \
-  registry.hl-dev.de/alpine-mailutil:latest
+  hldev/mailutil-alpine:latest
 ```
 
 ---
@@ -105,7 +105,7 @@ docker run --rm \
   -e TO=admin@example.com \
   -e SUBJECT="Mail with Auth" \
   -e BODY="This message uses SMTP authentication." \
-  registry.hl-dev.de/alpine-mailutil:latest
+  hldev/mailutil-alpine:latest
 ```
 
 ---
@@ -121,7 +121,7 @@ docker run --rm \
   -e SUBJECT="Skip TLS Check" \
   -e BODY="This skips TLS certificate validation." \
   -e TLS_CERTCHECK=off \
-  registry.hl-dev.de/alpine-mailutil:latest
+  hldev/mailutil-alpine:latest
 ```
 
 ---
@@ -138,7 +138,7 @@ docker run --rm \
   -e SUBJECT="Secure Mail" \
   -e BODY="This email uses a mounted CA cert for TLS." \
   -e TLS_CERT_PATH=/certs/smtp.pem \
-  registry.hl-dev.de/alpine-mailutil:latest
+  hldev/mailutil-alpine:latest
 ```
 
 ---
@@ -158,7 +158,7 @@ docker run --rm \
   -e TO=admin@example.com \
   -e SUBJECT="Daily Report" \
   -e BODY_FILE="/tmp/body.txt" \
-  registry.hl-dev.de/alpine-mailutil:latest
+  hldev/mailutil-alpine:latest
 ```
 
 This method is ideal for logs and large output, and preserves special characters and emojis like `🐳`, `✅`, or `🔥`.
@@ -217,7 +217,7 @@ docker run --rm \
   -e TO="$MAIL_TO" \
   -e SUBJECT="$MAIL_SUBJECT" \
   -e BODY_FILE="/tmp/body.txt" \
-  registry.hl-dev.de/root/mailutil-alpine:latest
+  hldev/mailutil-alpine:latest
 ```
 
 ---
