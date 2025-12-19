@@ -7,7 +7,6 @@
 - **GitLab Repository:** [https://gitlab.hl-dev.de/root/mailutil-alpine](https://gitlab.hl-dev.de/root/mailutil-alpine)
 - **Github Repository Mirror:** [https://github.com/devcodemonkey/de.devcodemonkey.mailutil-alpine](https://github.com/devcodemonkey/de.devcodemonkey.mailutil-alpine)
 
-
 ## 🚦 Pipeline Status
 
 [![pipeline status](https://gitlab.hl-dev.de/root/mailutil-alpine/badges/main/pipeline.svg)](https://gitlab.hl-dev.de/root/mailutil-alpine/-/commits/main)
@@ -17,14 +16,16 @@
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
+
 ### 🧱 Version v1.2.5
+
 - alpine: 3.23.2
 - msmtp: msmtp version 1.8.32
 
 ### 🧱 Version v1.2.4
+
 - alpine: 3.23.0
 - msmtp: msmtp version 1.8.32
-
 
 ### 🧱 Version v1.2.3
 
@@ -247,6 +248,13 @@ docker run --rm \
 ---
 
 ## 📝 Changelog
+
+### \[v1.2.5] - 2025-12-19
+
+#### 🔄 Updated
+
+- Updated `Alpine` to `3.23.2`
+- Updated `msmtp` to version `1.8.32`
 
 ### \[v1.2.4] - 2025-12-05
 
