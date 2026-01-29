@@ -253,6 +253,13 @@ docker run --rm \
 
 ## 📝 Changelog
 
+### \[v1.2.6] - 2025-01-29
+
+#### 🔄 Updated
+
+- Updated `Alpine` to `3.23.3`
+- Updated `msmtp` to version `1.8.32`
+
 ### \[v1.2.5] - 2025-12-19
 
 #### 🔄 Updated
