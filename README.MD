@@ -16,14 +16,16 @@
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
+
 ### 🧱 Version 1.2.6
+
 - alpine: 3.23.4
 - msmtp: msmtp version 1.8.32
 
 ### 🧱 Version v.1.2.6
+
 - alpine: 3.23.3
 - msmtp: msmtp version 1.8.32
-
 
 ### 🧱 Version v1.2.5
 
@@ -257,6 +259,13 @@ docker run --rm \
 
 ## 📝 Changelog
 
+### [v1.2.6] - 2026-04-19
+
+#### 🔄 Updated
+
+- Updated `Alpine` to `3.23.4`
+- Updated `msmtp` to version `1.8.32`
+
 ### \[v1.2.6] - 2026-01-29
 
 #### 🔄 Updated
@@ -309,14 +318,12 @@ docker run --rm \
 
 - Dockerfile: Added `musl-locales` and `ENV LANG=C.UTF-8` for Unicode compatibility.
 - Mail script: Added email headers for UTF-8 support:
-
   - `Content-Type: text/plain; charset=UTF-8`
   - `Content-Transfer-Encoding: 8bit`
 
 #### 🧪 Compatibility
 
 - Works with both:
-
   - `-e BODY="..."` for short inline messages
   - `-e BODY_FILE="..."` with volume mount for full logs
 
