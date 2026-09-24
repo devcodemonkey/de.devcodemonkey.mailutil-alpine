@@ -16,18 +16,21 @@
 ## 📦 Image Versions
 
 <!-- VERSION_START -->
+
 ### 🧱 Version v1.2.8
+
 - alpine: 3.24.2
 - msmtp: msmtp version 1.8.32
 
 ### 🧱 Version v1.2.7
+
 - alpine: 3.24.1
 - msmtp: msmtp version 1.8.32
 
 ### 🧱 Version v1.2.6
+
 - alpine: 3.23.4
 - msmtp: msmtp version 1.8.32
-
 
 ### 🧱 Version v1.2.5
 
@@ -261,6 +264,12 @@ docker run --rm \
 
 ## 📝 Changelog
 
+### [v1.2.8] - 2026-09-24
+
+#### 🔄 Updated
+
+- Updated `Alpine` to `3.24.2`
+- Updated `msmtp` to version `1.8.32`
 
 ### [v1.2.7] - 2026-06-26
 
